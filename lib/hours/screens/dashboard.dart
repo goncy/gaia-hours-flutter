@@ -12,28 +12,31 @@ class DashboardScreen extends StatefulWidget {
 
 class _DashboardScreenState extends State<DashboardScreen> {
   bool _hasFetched;
+  bool _isLoading;
 
   @override
   void initState() {
     _hasFetched = false;
+    _isLoading = true;
 
     super.initState();
   }
 
   @override
-  void didChangeDependencies() {
+  void didChangeDependencies() async {
     super.didChangeDependencies();
 
     if (!_hasFetched) {
-      Provider.of<HoursContext>(context).list();
-
       _hasFetched = true;
+
+      await Provider.of<HoursContext>(context).list();
+
+      _isLoading = false;
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    var isLoading = Provider.of<HoursContext>(context).isLoading;
     var hours = Provider.of<HoursContext>(context).registries;
 
     return Scaffold(
@@ -45,8 +48,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
       ]),
       body: hours.isEmpty
           ? Center(
-              child: isLoading
-                  ? Text('Cargando horas...')
+              child: _isLoading
+                  ? CircularProgressIndicator()
                   : Text('No hay horas cargadas'),
             )
           : ListView.builder(

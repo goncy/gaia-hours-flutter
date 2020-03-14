@@ -37,15 +37,3 @@ class User {
     this.lastName,
   });
 }
-
-/// Session class
-class Session {
-  /// Session token
-  final String token;
-
-  /// Session user
-  final User user;
-
-  /// Session constructor
-  Session({@required this.token, this.user});
-}

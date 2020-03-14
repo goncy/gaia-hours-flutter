@@ -25,16 +25,20 @@ class _LoginScreenState extends State<LoginScreen> {
 
       try {
         setState(() => _isLoading = true);
+
         await login(_username, _password);
+
         setState(() => _isLoading = false);
 
         Navigator.pushReplacementNamed(context, '/dashboard');
       } on Exception catch (e) {
         setState(() => _isLoading = false);
 
-        _scaffold.currentState.showSnackBar(SnackBar(
-          content: Text(e.toString()),
-        ));
+        _scaffold.currentState.showSnackBar(
+          SnackBar(
+            content: Text(e.toString()),
+          ),
+        );
       }
     }
   }
@@ -56,28 +60,32 @@ class _LoginScreenState extends State<LoginScreen> {
                   Padding(
                     padding: const EdgeInsets.only(bottom: 8.0),
                     child: TextFormField(
-                        onSaved: (username) => _username = username,
-                        validator: (username) =>
-                            username.isEmpty ? 'This field is required' : null,
-                        decoration: InputDecoration(
-                          labelText: 'Username',
-                        )),
+                      onSaved: (username) => _username = username,
+                      validator: (username) =>
+                          username.isEmpty ? 'Este campo es requerido' : null,
+                      decoration: InputDecoration(
+                        labelText: 'Username',
+                      ),
+                    ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 8.0),
                     child: TextFormField(
-                        onSaved: (password) => _password = password,
-                        validator: (password) =>
-                            password.isEmpty ? 'This field is required' : null,
-                        decoration: InputDecoration(
-                          labelText: "Password",
-                        )),
+                      onSaved: (password) => _password = password,
+                      validator: (password) =>
+                          password.isEmpty ? 'Este campo es requerido' : null,
+                      decoration: InputDecoration(
+                        labelText: "Password",
+                      ),
+                    ),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: RaisedButton(
                       onPressed: _handleSubmit,
-                      child: _isLoading ? Text('Loading') : Text('Submit'),
+                      child: _isLoading
+                          ? Text('Iniciando sesión')
+                          : Text('Iniciar sesión'),
                     ),
                   ),
                 ],

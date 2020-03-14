@@ -1,5 +1,7 @@
 import 'package:flutter/widgets.dart';
 
+import '../session/models.dart';
+
 import './models.dart';
 import './resource.dart';
 
@@ -7,21 +9,18 @@ import './resource.dart';
 class HoursContext extends ChangeNotifier {
   final HoursResource _resource = HoursResource();
 
-  /// Hours context loading status
-  bool isLoading = false;
-
   /// Hours list
   List<Registry> registries = [];
 
-  /// Fetch on initialize
+  /// User
+  User user;
+
+  /// Constructor
   HoursContext();
 
-  void list() async {
+  Future list() async {
     try {
-      isLoading = true;
-
       registries = await _resource.list();
-      isLoading = false;
 
       notifyListeners();
     } on Exception catch (exception) {
@@ -30,10 +29,8 @@ class HoursContext extends ChangeNotifier {
   }
 
   /// Add registries
-  void add(Registry registry) async {
-    // await _resource.add(registry);
-
-    registries.add(registry);
+  Future add(int hours, int project, int category) async {
+    registries.add(await _resource.add(user.id, hours, project, category));
 
     notifyListeners();
   }

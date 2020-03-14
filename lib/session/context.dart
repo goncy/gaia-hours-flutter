@@ -7,28 +7,21 @@ import './resource.dart';
 class SessionContext extends ChangeNotifier {
   final SessionResource _resource = SessionResource();
 
-  /// Session context loading status
-  bool isLoading = false;
-
-  /// Sessions list
-  Session session;
+  /// User
+  User user;
 
   /// SessionContext constructor
   SessionContext();
 
   /// Login
-  Future login(String username, String password) async {
+  Future<User> login(String username, String password) async {
     try {
-      isLoading = true;
-
-      session = await _resource.login(username, password);
-
-      isLoading = false;
+      user = await _resource.login(username, password);
 
       notifyListeners();
-    } on Exception catch (exception) {
-      isLoading = false;
 
+      return user;
+    } on Exception catch (exception) {
       notifyListeners();
 
       throw exception;

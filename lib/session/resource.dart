@@ -11,7 +11,7 @@ class SessionResource {
   final _storage = new FlutterSecureStorage();
 
   /// Login
-  Future<Session> login(String username, String password) async {
+  Future<User> login(String username, String password) async {
     final http.Response response = await http.post(
       _uri,
       headers: {
@@ -28,10 +28,7 @@ class SessionResource {
 
       await _storage.write(key: 'token', value: session['key']);
 
-      return Session(
-        token: session['key'],
-        user: User.fromJson(session['user']),
-      );
+      return User.fromJson(session['user']);
     } else {
       throw Exception('Failed to log in');
     }
