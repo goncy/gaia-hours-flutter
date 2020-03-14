@@ -9,18 +9,31 @@ import './resource.dart';
 class HoursContext extends ChangeNotifier {
   final HoursResource _resource = HoursResource();
 
+  /// Status
+  bool isLoading = false;
+
   /// Hours list
   List<Registry> registries = [];
 
   /// User
-  User user;
+  User _user;
 
   /// Constructor
   HoursContext();
 
+  void init(User user) {
+    _user = user;
+
+    list();
+  }
+
   Future list() async {
     try {
+      isLoading = true;
+
       registries = await _resource.list();
+
+      isLoading = false;
 
       notifyListeners();
     } on Exception catch (exception) {
@@ -30,7 +43,11 @@ class HoursContext extends ChangeNotifier {
 
   /// Add registries
   Future add(int hours, int project, int category) async {
-    registries.add(await _resource.add(user.id, hours, project, category));
+    isLoading = true;
+
+    registries.add(await _resource.add(_user.id, hours, project, category));
+
+    isLoading = false;
 
     notifyListeners();
   }

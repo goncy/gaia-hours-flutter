@@ -16,8 +16,9 @@ class App extends StatelessWidget {
         providers: [
           ChangeNotifierProvider(create: (context) => SessionContext()),
           ChangeNotifierProxyProvider<SessionContext, HoursContext>(
-              create: (_) => HoursContext(),
-              update: (_, session, hours) => hours..user = session.user),
+            create: (_) => HoursContext(),
+            update: (_, session, hours) => hours..init(session.user),
+          ),
         ],
         child: MaterialApp(
           theme: ThemeData(
