@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 /// Project class
 class Project {
   /// Project id
-  final String id;
+  final int id;
 
   /// Project name
   final String name;
@@ -31,7 +31,7 @@ class Project {
 /// Category class
 class Category {
   /// Category id
-  final String id;
+  final int id;
 
   /// Category name
   final String name;

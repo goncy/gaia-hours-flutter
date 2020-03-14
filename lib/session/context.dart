@@ -24,6 +24,7 @@ class SessionContext extends ChangeNotifier {
       notifyListeners();
 
       session = await _resource.login(username, password);
+
       isLoading = false;
 
       notifyListeners();

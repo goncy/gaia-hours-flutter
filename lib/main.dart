@@ -13,17 +13,21 @@ void main() => runApp(App());
 class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) => MultiProvider(
-          providers: [
-            ChangeNotifierProvider(create: (context) => SessionContext()),
-            ChangeNotifierProvider(create: (context) => HoursContext()),
-          ],
-          child: MaterialApp(
-              theme: ThemeData(
-                  brightness: Brightness.light, primarySwatch: Colors.green),
-              initialRoute: '/login',
-              routes: {
-                '/login': (context) => LoginScreen(),
-                '/dashboard': (context) => DashboardScreen(),
-                '/register': (context) => RegisterScreen(),
-              }));
+        providers: [
+          ChangeNotifierProvider(create: (context) => SessionContext()),
+          ChangeNotifierProvider(create: (context) => HoursContext()),
+        ],
+        child: MaterialApp(
+          theme: ThemeData(
+            brightness: Brightness.light,
+            primarySwatch: Colors.green,
+          ),
+          initialRoute: '/login',
+          routes: {
+            '/login': (context) => LoginScreen(),
+            '/dashboard': (context) => DashboardScreen(),
+            '/register': (context) => RegisterScreen(),
+          },
+        ),
+      );
 }

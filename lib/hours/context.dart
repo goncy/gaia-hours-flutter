@@ -14,11 +14,9 @@ class HoursContext extends ChangeNotifier {
   List<Registry> registries = [];
 
   /// Fetch on initialize
-  HoursContext({initialize = false}) {
-    if (initialize) _list();
-  }
+  HoursContext();
 
-  Future _list() async {
+  void list() async {
     try {
       isLoading = true;
 
@@ -34,7 +32,9 @@ class HoursContext extends ChangeNotifier {
   }
 
   /// Add registries
-  void add(Registry registry) {
+  void add(Registry registry) async {
+    // await _resource.add(registry);
+
     registries.add(registry);
 
     notifyListeners();

@@ -6,7 +6,7 @@ import '../session/models.dart';
 /// Registry class
 class Registry {
   /// Registry id
-  final String id;
+  final int id;
 
   /// Registry user
   final User user;
