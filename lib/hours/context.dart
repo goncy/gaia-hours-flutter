@@ -20,8 +20,6 @@ class HoursContext extends ChangeNotifier {
     try {
       isLoading = true;
 
-      notifyListeners();
-
       registries = await _resource.list();
       isLoading = false;
 

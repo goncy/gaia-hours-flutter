@@ -21,8 +21,6 @@ class SessionContext extends ChangeNotifier {
     try {
       isLoading = true;
 
-      notifyListeners();
-
       session = await _resource.login(username, password);
 
       isLoading = false;
