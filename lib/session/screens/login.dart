@@ -24,8 +24,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
       try {
         await login(_username, _password);
-
-        Navigator.pushReplacementNamed(context, '/dashboard');
       } on Exception catch (e) {
         _scaffold.currentState.showSnackBar(
           SnackBar(

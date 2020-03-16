@@ -7,6 +7,10 @@ import './resource.dart';
 
 /// Hours context
 class HoursContext extends ChangeNotifier {
+  /// User
+  final User user;
+
+  /// Resource
   final HoursResource _resource = HoursResource();
 
   /// Status
@@ -15,15 +19,7 @@ class HoursContext extends ChangeNotifier {
   /// Hours list
   List<Registry> registries = [];
 
-  /// User
-  User _user;
-
-  /// Constructor
-  HoursContext();
-
-  void init(User user) {
-    _user = user;
-
+  HoursContext(this.user) {
     list();
   }
 
@@ -48,7 +44,7 @@ class HoursContext extends ChangeNotifier {
 
     notifyListeners();
 
-    registries.add(await _resource.add(_user.id, hours, project, category));
+    registries.add(await _resource.add(user.id, hours, project, category));
     isLoading = false;
 
     notifyListeners();

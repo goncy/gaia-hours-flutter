@@ -24,8 +24,6 @@ class HoursResource {
       },
     );
 
-    debugPrint(response.statusCode.toString());
-
     if (response.statusCode == 200) {
       var registries = jsonDecode(response.body);
 
