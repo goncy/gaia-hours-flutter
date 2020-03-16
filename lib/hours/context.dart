@@ -20,10 +20,12 @@ class HoursContext extends ChangeNotifier {
   /// Hours list
   List<Registry> registries = [];
 
+  /// Constructor
   HoursContext(this.user) {
     list();
   }
 
+  /// Fetch hours
   Future list() async {
     try {
       isLoading = true;
@@ -52,10 +54,15 @@ class HoursContext extends ChangeNotifier {
   }
 }
 
+/// Hours provider
 class HoursProvider extends StatelessWidget {
+  /// Child widget
   final Widget child;
+
+  /// Active user
   final User user;
 
+  /// Constructor
   HoursProvider({Key key, @required this.child, @required this.user})
       : super(key: key);
 

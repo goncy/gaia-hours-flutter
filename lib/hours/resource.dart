@@ -1,8 +1,7 @@
-import 'package:flutter/material.dart';
+import 'dart:convert';
+
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
-
-import 'dart:convert';
 
 import "./models.dart";
 
@@ -10,13 +9,12 @@ import "./models.dart";
 class HoursResource {
   final _uri =
       'https://gaia-gestion-backend-testing.herokuapp.com/api/working-hours/';
-  final _storage = new FlutterSecureStorage();
+  final _storage = FlutterSecureStorage();
 
   /// Fetch all registries
   Future<List<Registry>> list() async {
-    String token = await _storage.read(key: 'token');
-
-    final http.Response response = await http.get(
+    var token = await _storage.read(key: 'token');
+    var response = await http.get(
       _uri,
       headers: {
         'Content-Type': 'application/json; charset=UTF-8',
@@ -39,9 +37,8 @@ class HoursResource {
 
   /// Add registry
   Future<Registry> add(int user, int hours, int project, int category) async {
-    String token = await _storage.read(key: 'token');
-
-    final http.Response response = await http.post(
+    var token = await _storage.read(key: 'token');
+    var response = await http.post(
       _uri,
       headers: {
         'Content-Type': 'application/json; charset=UTF-8',

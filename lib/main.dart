@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
-import './session/context.dart';
+import './globals.dart';
 import './hours/context.dart';
 import './hours/screens/dashboard.dart';
 import './hours/screens/register.dart';
-import './globals.dart';
+import './session/context.dart';
 
 void main() => runApp(App());
 
@@ -13,20 +12,16 @@ void main() => runApp(App());
 class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) => SessionProvider(
-        child: Builder(builder: (context) {
-          var user = Provider.of<SessionContext>(context).user;
-
-          return HoursProvider(
-            user: user,
-            child: MaterialApp(
-              theme: theme,
-              initialRoute: '/dashboard',
-              routes: {
-                '/dashboard': (context) => DashboardScreen(),
-                '/register': (context) => RegisterScreen(),
-              },
-            ),
-          );
-        }),
+        builder: (user) => HoursProvider(
+          user: user,
+          child: MaterialApp(
+            theme: theme,
+            initialRoute: '/dashboard',
+            routes: {
+              '/dashboard': (context) => DashboardScreen(),
+              '/register': (context) => RegisterScreen(),
+            },
+          ),
+        ),
       );
 }

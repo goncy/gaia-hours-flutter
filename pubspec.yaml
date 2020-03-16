@@ -29,6 +29,7 @@ dependencies:
   flutter_secure_storage:
 
 dev_dependencies:
+  effective_dart:
   flutter_test:
     sdk: flutter
 

@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../components/card.dart';
 import '../context.dart';
 
+/// Dashboard screen
 class DashboardScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

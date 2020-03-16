@@ -4,9 +4,9 @@ import 'package:provider/provider.dart';
 
 import '../globals.dart';
 
-import './screens/login.dart';
 import './models.dart';
 import './resource.dart';
+import './screens/login.dart';
 
 /// Session context
 class SessionContext extends ChangeNotifier {
@@ -32,37 +32,44 @@ class SessionContext extends ChangeNotifier {
       isLoading = false;
 
       notifyListeners();
-    } on Exception catch (exception) {
+    } on Exception {
       notifyListeners();
 
-      throw exception;
+      rethrow;
     }
   }
 }
 
+/// Session provider
 class SessionProvider extends StatelessWidget {
+  /// Child widget
   final Widget child;
 
-  SessionProvider({Key key, @required this.child}) : super(key: key);
+  /// Widget builder
+  final Widget Function(User user) builder;
+
+  /// Constructor
+  SessionProvider({this.child, this.builder});
 
   @override
   Widget build(BuildContext context) => ChangeNotifierProvider(
         create: (context) => SessionContext(),
-        child: _SessionProvider(child),
+        child: _SessionProvider(child: child, builder: builder),
       );
 }
 
 class _SessionProvider extends StatelessWidget {
   final Widget child;
+  final Widget Function(User user) builder;
 
-  _SessionProvider(this.child);
+  _SessionProvider({this.child, this.builder});
 
   @override
   Widget build(BuildContext context) {
     var user = Provider.of<SessionContext>(context).user;
 
     return user != null
-        ? child
+        ? builder != null ? builder(user) : child
         : MaterialApp(
             theme: theme,
             home: LoginScreen(),
