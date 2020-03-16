@@ -31,8 +31,9 @@ class HoursContext extends ChangeNotifier {
     try {
       isLoading = true;
 
-      registries = await _resource.list();
+      notifyListeners();
 
+      registries = await _resource.list();
       isLoading = false;
 
       notifyListeners();
@@ -45,8 +46,9 @@ class HoursContext extends ChangeNotifier {
   Future add(int hours, int project, int category) async {
     isLoading = true;
 
-    registries.add(await _resource.add(_user.id, hours, project, category));
+    notifyListeners();
 
+    registries.add(await _resource.add(_user.id, hours, project, category));
     isLoading = false;
 
     notifyListeners();

@@ -20,6 +20,9 @@ class SessionContext extends ChangeNotifier {
   Future login(String username, String password) async {
     try {
       isLoading = true;
+
+      notifyListeners();
+
       user = await _resource.login(username, password);
       isLoading = false;
 
