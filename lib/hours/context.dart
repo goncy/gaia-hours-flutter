@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+import 'package:provider/provider.dart';
 
 import '../session/models.dart';
 
@@ -49,4 +50,18 @@ class HoursContext extends ChangeNotifier {
 
     notifyListeners();
   }
+}
+
+class HoursProvider extends StatelessWidget {
+  final Widget child;
+  final User user;
+
+  HoursProvider({Key key, @required this.child, @required this.user})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) => ChangeNotifierProvider(
+        create: (context) => HoursContext(user),
+        child: child,
+      );
 }

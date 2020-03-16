@@ -16,8 +16,8 @@ class App extends StatelessWidget {
         child: Builder(builder: (context) {
           var user = Provider.of<SessionContext>(context).user;
 
-          return ChangeNotifierProvider(
-            create: (context) => HoursContext(user),
+          return HoursProvider(
+            user: user,
             child: MaterialApp(
               theme: theme,
               initialRoute: '/dashboard',
