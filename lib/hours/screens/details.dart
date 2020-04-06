@@ -24,9 +24,12 @@ class _DetailsScreenState extends State<DetailsScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              widget.registry.project.name,
-              style: const TextStyle(fontSize: 32.0),
+            Hero(
+              tag: widget.registry.id,
+              child: Text(
+                widget.registry.project.name,
+                style: const TextStyle(fontSize: 32.0),
+              ),
             ),
             Text(
               widget.registry.category.name,

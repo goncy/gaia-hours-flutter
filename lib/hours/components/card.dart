@@ -32,8 +32,13 @@ class HoursCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: <Widget>[
-                          Text(registry.project.name,
-                              style: Theme.of(context).textTheme.headline5),
+                          Hero(
+                            tag: registry.id,
+                            child: Text(
+                              registry.project.name,
+                              style: Theme.of(context).textTheme.headline5,
+                            ),
+                          ),
                           Row(
                             children: <Widget>[Text(registry.hours)],
                           )
